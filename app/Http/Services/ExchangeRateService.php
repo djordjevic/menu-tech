@@ -6,7 +6,6 @@ use App\Http\Repositories\ExchangeRateRepository;
 use App\Http\Traits\CommonAppTrait;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Redis;
 
 class ExchangeRateService {
 

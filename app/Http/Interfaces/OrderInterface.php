@@ -30,4 +30,9 @@ interface OrderInterface {
      */
     public function getOrders();
 
+    /**
+     * @return mixed
+     */
+    public function update(array $data, $id);
+
 }

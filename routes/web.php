@@ -14,8 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
+
+Route::view('/swagger', 'swagger');
 
 //Route::get('/', [\App\Http\Controllers\CurrencyController::class, 'index'])->name('currency.get');
 Route::get('/db', [\App\Http\API\Controllers\CurrencyController::class, 'getAllFromDb'])->name('currency.dbGet');

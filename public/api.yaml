@@ -1,0 +1,217 @@
+openapi: 3.0.3
+info:
+  title: Swagger Exchanger - OpenAPI 3.0
+  description: >-
+    This is a sample Currency Exchange Server based on the OpenAPI 3.0 specification.
+    You can find out more about
+
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://localhost
+servers:
+  - url: http://localhost
+tags:
+  - name: currencies
+    description: Currencies list
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+  - name: orders
+    description:
+    externalDocs:
+      description: Find out more about orders
+      url: http://swagger.io
+
+paths:
+  /api/getCurrenciesList:
+    get:
+      tags:
+        - currencies
+      summary: List of all currencies
+      description: get currencies list
+      operationId:
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Currency'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Currency'
+        '404':
+          description: Resource not found
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
+
+
+  /api/orders:
+    get:
+      tags:
+        - orders
+      summary: Returns orders list
+      description:
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '204':
+          description: There is no saved orders
+
+      security:
+        - api_key: []
+  /api/orders/create:
+    post:
+      tags:
+        - orders
+      summary: Place an order for
+      description: Place a new order
+      operationId: placeOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '201':
+          description: Order has been created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '422':
+          description: Invalid input/Unprocessable Content
+  /api/orders/{id}:
+    get:
+      tags:
+        - orders
+      summary: Find order by ID
+      description: >-
+      operationId: getOrderById
+      parameters:
+        - name: id
+          in: path
+          description: ID of order that needs to be fetched
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '204':
+          description: There is no saved order
+        '404':
+          description: Resource not found
+    delete:
+      tags:
+        - orders
+      summary: Delete order by ID
+      description:
+      operationId: deleteOrder
+      parameters:
+        - name: id
+          in: path
+          description: ID of the order that needs to be deleted
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Order deleted
+        '404':
+          description: Order not found
+    put:
+      tags:
+        - orders
+      summary: Update order by ID
+      description:
+
+      operationId: updateOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      parameters:
+        - name: id
+          in: path
+          description: ID of the order that needs to be  updated
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '404':
+          description: Order not found
+        '201':
+          description: Order has been updated
+
+components:
+  schemas:
+    Order:
+      type: object
+      properties:
+        discount_amount:
+          type: integer
+          format: int64
+          example: 10
+        discount_percent:
+          type: integer
+          format: int64
+          example: 5
+        exchange_rate:
+          type: float
+          format: int32
+          example: 130.3456
+        foreign_currency:
+          type: string
+          example: "JPY"
+        foreign_currency_amount:
+          type: integer
+          format: int32
+          example: 1000
+        surcharge_amount:
+          type: float
+          format: int32
+          example: 20.20
+        surcharge_percent:
+          type: float
+          format: int32
+          example: 5
+        total_paid_amount:
+          type: float
+          format: int32
+          example: 1000
+      xml:
+        name: order
+    Currency:
+      type: object
+      properties:
+        JPY:
+          example: 130.79503
+        EUR:
+          example: 0.93865
+        GBP:
+          example: 0.830151
+      xml:
+        name: category
+

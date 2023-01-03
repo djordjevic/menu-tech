@@ -36,11 +36,13 @@ class CurrencyRepository implements CurrencyInterface
      */
     public function getDbCurrencies() : array
     {
-        return $this->model::query()
+        $currencies = $this->model::query()
             ->select( 'swift_code')
             ->whereIn('swift_code', $this->getRequestedCurrencies())
             ->get()
             ->toArray();
+
+        return ['JPY' => $currencies[2]['swift_code'], 'GBP' => $currencies[1]['swift_code'], 'EUR' => $currencies[0]['swift_code']];
     }
 
     public function getBaseCurrency()

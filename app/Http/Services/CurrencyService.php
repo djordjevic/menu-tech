@@ -3,12 +3,8 @@ namespace App\Http\Services;
 
 use App\Http\Repositories\CurrencyRepository;
 use App\Http\Traits\CommonAppTrait;
-use App\Models\Currency;
-use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redis;
 
 class CurrencyService {
 

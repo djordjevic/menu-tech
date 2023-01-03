@@ -18,6 +18,7 @@ Route::get('/getCurrenciesList', [\App\Http\API\Controllers\CurrencyController::
 Route::get('/orders/{id}', [\App\Http\API\Controllers\OrderController::class, 'getOrderById'])->name('orders.get_order_by_id');
 Route::post('/orders/calculate', [\App\Http\API\Controllers\OrderController::class, 'calculate'])->name('calculation.calculate_currency');
 Route::post('/orders/create', [\App\Http\API\Controllers\OrderController::class, 'store'])->name('orders.create_order');
-Route::delete('/orders/delete/{id}', [\App\Http\API\Controllers\OrderController::class, 'destroy'])->name('orders.delete_order');
+Route::delete('/orders/{id}', [\App\Http\API\Controllers\OrderController::class, 'destroy'])->name('orders.delete_order');
 Route::get('/orders', [\App\Http\API\Controllers\OrderController::class, 'getOrders'])->name('orders.get_orders');
+Route::put('/orders/{id}', [\App\Http\API\Controllers\OrderController::class, 'update'])->name('orders.update_orders');
 

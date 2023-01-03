@@ -36,6 +36,6 @@ class CurrencyController extends Controller
             return response()->error('No data available through cache and database', '200');
         }
 
-        return response()->success($this->currencyService->getCachedCurrencies(), '200');
+        return response()->success($this->currencyService->getCachedCurrencies(), 'Currencies list', '200');
     }
 }

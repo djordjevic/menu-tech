@@ -34,6 +34,7 @@ class ExchangeRatesSeeder extends Seeder
                 'to_currency' => 'EUR',
                 'exchange_rate' => 0.884872
             ]];
+
         foreach ($data as $value) {
             ExchangeRate::create($value);
         }

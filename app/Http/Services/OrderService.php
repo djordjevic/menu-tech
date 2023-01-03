@@ -68,7 +68,7 @@ class OrderService {
             'exchange_rate' => $this->exchangeRate,
             'surcharge_percent' => $this->surCharge,
             'surcharge_amount' => round($this->surChargeAmount, 4),
-            'foreign_currency_amount' => $calculationData->amount,
+            'foreign_currency_amount' => (int)$calculationData->amount,
             'total_paid_amount' => round ($this->amountToPayIncludingSurcharge-$this->totalDiscount, 4),
             'discount_percent' => $this->discount,
             'total_discount' => round($this->totalDiscount,4)
@@ -84,15 +84,23 @@ class OrderService {
        return $this->orderRepository->create($data);
     }
 
+    /**
+     * @param $id
+     * @return false|mixed
+     */
     public function delete($id)
     {
-        if($order = $this->orderRepository->getOrder($id)) {
-            return $this->orderRepository->delete($order);
+        $order = $this->getOrderById($id);
+        if(!$order) {
+            return false;
         }
 
-        return false;
+        return $this->orderRepository->delete($order);
     }
 
+    /**
+     * @return mixed|null
+     */
     public function getOrders()
     {
         if($this->orderRepository->getOrders()->isEmpty()) {
@@ -102,13 +110,31 @@ class OrderService {
         return $this->orderRepository->getOrders();
     }
 
+    /**
+     * @param $id
+     * @return false|mixed
+     */
     public function  getOrderById($id)
     {
-        if($this->orderRepository->getOrder($id)->isEmpty()) {
+        if(is_null($this->orderRepository->getOrder($id))) {
             return false;
         }
-
         return $this->orderRepository->getOrder($id);
+    }
+
+    /**
+     * @param array $data
+     * @param $id
+     * @return false|mixed
+     */
+    public function updatePayment(array $data, $id)
+    {
+        $updatedOrder = $this->orderRepository->update($data, $id);
+        if($updatedOrder) {
+            return $updatedOrder;
+        }
+
+        return false;
     }
 }
 

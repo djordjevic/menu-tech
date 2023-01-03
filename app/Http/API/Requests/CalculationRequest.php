@@ -1,34 +1,42 @@
 <?php
 
-namespace App\Http\Api\Requests;
+namespace App\Http\API\Requests;
 
-use \Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Config;
 use \Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 
+/**
+ *
+ */
 class CalculationRequest extends  FormRequest {
 
+    /**
+     * @return bool
+     */
     public function authorize()
     {
         return true;
     }
 
+    /**
+     * @return mixed
+     */
     public function rules()
     {
         return Config::get('boilerplate.calculation_input.validation_rules');
 
     }
 
+    /**
+     * @return array
+     */
     public function messages(): array
     {
         return Config::get('boilerplate.calculation_input.validation_messages');
     }
 
-//    protected function failedValidation(Validator $validator)
-//    {
-//        throw new HttpResponseException(422, 'no', response()->json($validator->errors()));
-//    }
 
 }

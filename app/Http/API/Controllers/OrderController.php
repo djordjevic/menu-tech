@@ -6,6 +6,7 @@ use App\Http\API\Controllers\Controller;
 use App\Http\Api\Requests\CalculationRequest;
 use App\Http\API\Requests\CreateOrderRequest;
 use App\Http\API\Requests\DeleteOrderRequest;
+use App\Http\API\Requests\UpdateOrderRequest;
 use App\Http\Services\OrderService;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,7 @@ class OrderController extends Controller
      */
     public function calculate(CalculationRequest $calculationRequest)
     {
-        return response()->success($this->orderService->calculate($calculationRequest), '200' );
+        return response()->success($this->orderService->calculate($calculationRequest), 'Calculation data', '200' );
     }
 
     /**
@@ -39,7 +40,7 @@ class OrderController extends Controller
             return response()->error(['message' => 'Error creating order.'], '200');
         }
 
-        return response()->success(['message' => 'Order has been saved'], '201');
+        return response()->success('','Order has been saved', '201');
     }
 
     /**
@@ -52,12 +53,11 @@ class OrderController extends Controller
     {
         $orders = $this->orderService->getOrders();
 
-        if(!$orders) {
-            return response()->error(['message' => 'There is no saved orders'], '200');
+        if($orders) {
+            return response()->success($orders, '200');
         }
 
-        return response()->success($orders, '200');
-
+        return response()->error(['message' => 'No orders.'], '200');
     }
 
     /**
@@ -67,20 +67,22 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateOrderRequest $updateOrderRequest, $id)
     {
-        //
+        $updatedOrder = $this->orderService->updatePayment($updateOrderRequest->all(), $id);
+
+        return response()->success($updatedOrder, 'Order has been updated', '201');
     }
 
     public function getOrderById($id)
     {
         $order = $this->orderService->getOrderById($id);
-
         if(!$order) {
-            return response()->error(['message' => 'There is no saved orders'], '200');
+            return response()->error(['message' => 'Order does not exist'], '200');
         }
 
-        return response()->success($order, '200');    }
+        return response()->success($order, '200');
+    }
 
     /**
      * @param $id
@@ -88,9 +90,11 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-       if($this->orderService->delete($id)) {
-           return response()->success(['message' => 'Order has been deleted'], '200');
-
+        $order = $this->orderService->delete($id);
+        if(!$order) {
+            return response()->error(['message' => 'There is no order for given id'], '200');
        }
+
+        return response()->success(['message' => 'Order has been deleted'], '200');
     }
 }

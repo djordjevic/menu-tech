@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Repositories;
 
-use App\Models\BaseCurrency;
 use App\Models\ExchangeRate;
 
 class ExchangeRateRepository {

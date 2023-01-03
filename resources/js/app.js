@@ -7,6 +7,10 @@ let foreignCurrencyAmount = 0;
 let totalPaidAmount = 0;
 let discountPercent = 0;
 let totalDiscount = 0;
+let successDiv = document.getElementById('success-div');
+let calculationSuccessResponse = document.getElementById('success-response');
+
+
 
 function calculate() {
     let calculateButton = document.querySelector('#calculate');
@@ -19,11 +23,10 @@ function calculate() {
         var payload = { amount: amount, currency: selectValue};
 
 
-        axios.post('/api/calculate',
+        axios.post('/api/orders/calculate',
             payload,
         ).then((response) => {
             let calculationSuccessResponse = document.getElementById('success-response');
-            let successDiv = document.getElementById('success-div');
 
             foreignCurrency = response.data.data.foreign_currency;
             exchangeRate = response.data.data.exchange_rate;
@@ -77,10 +80,11 @@ function createOrder()
             discount_amount: totalDiscount
         };
 
-        axios.post('/api/create',
+        axios.post('/api/orders/create',
             purchasePayload,
         ).then((response) => {
-            console.log(response.data.data.exchange_rate);
+            calculationSuccessResponse.innerHTML = response.data.message;
+            console.log(response.data.message);
 
         }) .catch((error) => {
 
