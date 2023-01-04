@@ -9,10 +9,6 @@ class ExchangeRateRepository {
      * @var ExchangeRate
      */
     protected $exchangeRateModel;
-    /**
-     * @var
-     */
-    protected $baseCurrencyModel;
 
     /**
      * @param ExchangeRate $exchangeRate

@@ -26,6 +26,7 @@ class CurrencyService {
     }
 
     /**
+     * Check if Redies keys are set
      * @param $values
      * @return bool
      */
@@ -40,6 +41,7 @@ class CurrencyService {
     }
 
     /**
+     * Return currencies and exchane rated from the Cache (Redis)
      * @return array
      */
     public function getCachedCurrencies() : array
@@ -56,6 +58,7 @@ class CurrencyService {
     }
 
     /**
+     * Return currencies from mysql
      * @return array
      */
     public function getDbCurrencies() : array
@@ -64,6 +67,7 @@ class CurrencyService {
     }
 
     /**
+     * Insert currencies list from the API
      * @param $data
      * @return void
      */
@@ -80,6 +84,7 @@ class CurrencyService {
     }
 
     /**
+     * Return base currency from the config if does not exist into db
      * @return \Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|mixed
      */
     public function getBaseCurrency()

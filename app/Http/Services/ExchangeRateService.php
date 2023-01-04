@@ -25,6 +25,7 @@ class ExchangeRateService {
     }
 
     /**
+     * Insert exchange rates into db from the API
      * @param $data
      * @return void
      */
@@ -41,14 +42,7 @@ class ExchangeRateService {
     }
 
     /**
-     * @return array
-     */
-    public function getBaseCurrency() : array
-    {
-        return $this->exchangeRateRepository->getBaseCurrency();
-    }
-
-    /**
+     * Cache exchange rates
      * @param $data
      * @return void
      */
