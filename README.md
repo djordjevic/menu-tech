@@ -30,14 +30,16 @@ Find app container and navigate into it, then run:
 After that, we have to run some commands to insert/update Currencies and Exchange Rates data from the API. Pls follow the commands order
 Run: 
 ## php artisan migrate:fresh
+Next command will populate currency list from the API.
 ## php artisan currencylayer:getcurrencies
 ## php artisan db:seed
+Next command will populate Exchange rates list from the API.
 ## php artisan currencylayer:get_exchange_rates_data
 
 After installation, home page on http://localhost should contain form. For the FrontEnd i've used Tailwind CSS and pure js.
 
 Swagger anotation is available on the: 
-# http://localhost/swagger
+## http://localhost/swagger
 
 Mailtrap credentials for email check are:
 https://mailtrap.io/signin
