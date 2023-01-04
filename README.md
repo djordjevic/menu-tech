@@ -7,7 +7,7 @@ After Sail has been installed, you may run the sail:install Artisan command. Thi
 
 ## php artisan sail:install
 
-To ensure that all containers are builded, run:
+To ensure that all containers are buildded, run:
 
 ## ./vendor/bin/sail build
 Note: select options for MySQl and Redis container too. 
@@ -23,7 +23,7 @@ Find app container and navigate into it, then run:
 ## composer install
 ## npm install
 ## npm run dev
-## cp.env.example .env
+## cp .env.example .env
 ## php artisan cache:clear
 ## php artisan config:clear
 
@@ -36,10 +36,15 @@ Run:
 
 After installation, home page on http://localhost should contain form. For the FrontEnd i've used Tailwind CSS and pure js.
 
-Swagger anotation is available on the: /swagger route.
-Mailtrap credentials for email check are: 
+Swagger anotation is available on the: 
+# http://localhost/swagger
+
+Mailtrap credentials for email check are:
+https://mailtrap.io/signin
 djordjevic_i@hotmail.com
 uhDCm*aHq9jRAAD
+
+Mailtrap config keys, Currencylayer API keys are published into .env file.
 
 
 

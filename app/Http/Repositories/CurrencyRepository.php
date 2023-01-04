@@ -47,7 +47,7 @@ class CurrencyRepository implements CurrencyInterface
 
     public function getBaseCurrency()
     {
-        return  $this->model::join('base_currencies', 'currency_id.id', '=', 'currencies.id')
+        return  $this->model::join('base_currencies', 'base_currencies.currency_id', '=', 'currencies.id')
             ->pluck('currencies.swift_code')
             ->all();
     }

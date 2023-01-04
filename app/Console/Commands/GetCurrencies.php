@@ -43,7 +43,6 @@ class GetCurrencies extends Command
             }
 
             $currencyService->populateCurrenciesList($data);
-//            $currencyService->cacheData($data);
         }
         logger("ERROR FETCHING CURRENCIES LIST -", [$res->body()]);
 

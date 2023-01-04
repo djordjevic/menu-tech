@@ -15,7 +15,7 @@ trait CommonAppTrait {
     /**
      * @return \Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|mixed
      */
-    public function getBaseCurrency()
+    public function getBaseConfigCurrency()
     {
         return $this->baseCurrency = config('currency.base_currency');
     }

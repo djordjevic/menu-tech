@@ -117,7 +117,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Order'
         '204':
-          description: There is no saved order
+          description: Order does not exist
         '404':
           description: Resource not found
     delete:

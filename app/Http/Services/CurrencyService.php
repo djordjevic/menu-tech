@@ -79,5 +79,18 @@ class CurrencyService {
             });
     }
 
+    /**
+     * @return \Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|mixed
+     */
+    public function getBaseCurrency()
+    {
+        $dbBaseCurrency = $this->currencyRepository->getBaseCurrency();
+        if(empty($dbBaseCurrency)) {
+            return $this->getBaseConfigCurrency();
+        }
+
+        return $dbBaseCurrency[0];
+    }
+
 
 }

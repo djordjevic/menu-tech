@@ -54,10 +54,10 @@ class OrderController extends Controller
         $orders = $this->orderService->getOrders();
 
         if($orders) {
-            return response()->success($orders, '200');
+            return response()->success($orders, 'Orders list', '200');
         }
 
-        return response()->error(['message' => 'No orders.'], '200');
+        return response()->error(['message' => 'There is no saved orders.'], '200');
     }
 
     /**
@@ -81,7 +81,7 @@ class OrderController extends Controller
             return response()->error(['message' => 'Order does not exist'], '200');
         }
 
-        return response()->success($order, '200');
+        return response()->success($order, 'Order items:', '200');
     }
 
     /**
@@ -95,6 +95,6 @@ class OrderController extends Controller
             return response()->error(['message' => 'There is no order for given id'], '200');
        }
 
-        return response()->success(['message' => 'Order has been deleted'], '200');
+        return response()->success('', 'Order has been deleted', '200');
     }
 }

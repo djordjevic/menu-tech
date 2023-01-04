@@ -33,7 +33,6 @@ class GetCurrencyExchangeRatesData extends Command
      */
     public function handle(ExchangeRateService $exchangeRateService, CurrencyService $currencyService)
     {
-
         $baseCurrency = $currencyService->getBaseCurrency();
 
         $res = Http::get( env('CURRENCY_LAYER_EXCHANGE_RATES'), [
